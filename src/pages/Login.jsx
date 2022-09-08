@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTriviaToken, getTriviaQuestions } from '../services/fetchapi';
+import { newUser } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -29,7 +30,8 @@ class Login extends React.Component {
     localStorage.setItem('token', (token));
     const questions = getTriviaQuestions(token);
     console.log(questions);
-    const { history } = this.props;
+    const { history, dispatch } = this.props;
+    dispatch(newUser(this.state));
     history.push('/game');
   };
 

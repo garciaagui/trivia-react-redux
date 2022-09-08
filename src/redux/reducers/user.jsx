@@ -1,9 +1,9 @@
-import { NEW_USER, USER_EMAIL } from '../actions';
+import { NEW_USER } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
   assertions: '',
-  score: '',
+  score: 0,
   gravatarEmail: '',
 };
 
@@ -12,12 +12,8 @@ function user(state = INITIAL_STATE, action) {
   case NEW_USER:
     return {
       ...state,
-      name: action.payload,
-    };
-  case USER_EMAIL:
-    return {
-      ...state,
-      gravatarEmail: action.payload,
+      name: action.payload.name,
+      gravatarEmail: action.payload.email,
     };
   default:
     return state;
