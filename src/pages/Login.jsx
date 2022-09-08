@@ -1,37 +1,40 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { getTriviaToken, getTriviaQuestions } from '../services/fetchapi';
 
 class Login extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      isDisable: true,
-      email: '',
-      name: '',
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.verifyBtn = this.verifyBtn.bind(this);
-  }
+  state = {
+    isButtonPlayDisable: true,
+    email: '',
+    name: '',
+  };
 
-  handleChange({ target: { name, value } }) {
+  validateInputs = () => {
+    const { name, email } = this.state;
+    const isValidEmail = /\S+@\S+\.\S+/.test(email);
+    const isValidLength = email.length > 0 && name.length > 0;
+    return isValidEmail && isValidLength;
+  };
+
+  handleChange = ({ target: { name, value } }) => {
     this.setState({
       [name]: value,
-    }, () => this.verifyBtn());
-  }
+      isButtonPlayDisable: !this.validateInputs(),
+    });
+  };
 
-  verifyBtn() {
-    const { name, email } = this.state;
-    const verifyEmail = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (verifyEmail.test(email) && name.length > 0) {
-      this.setState({ isDisable: false });
-    } else {
-      this.setState({ isDisable: true });
-    }
-  }
+  handlePlay = async () => {
+    const token = await getTriviaToken();
+    localStorage.setItem('token', (token));
+    const questions = getTriviaQuestions(token);
+    console.log(questions);
+    const { history } = this.props;
+    history.push('/game');
+  };
 
   render() {
-    const { email, name, isDisable } = this.state;
+    const { email, name, isButtonPlayDisable } = this.state;
     return (
       <div>
         <label htmlFor="input">
@@ -61,8 +64,8 @@ class Login extends React.Component {
         <button
           type="button"
           data-testid="btn-play"
-          disabled={ isDisable }
-          onClick={ this.handleBtn }
+          disabled={ isButtonPlayDisable }
+          onClick={ this.handlePlay }
         >
           Play
         </button>
@@ -71,11 +74,11 @@ class Login extends React.Component {
   }
 }
 
-// Login.propTypes = {
-//   dispatch: PropTypes.func,
-//   history: PropTypes.shape({
-//     push: PropTypes.func,
-//   }),
-// }.isRequired;
+Login.propTypes = {
+  // dispatch: PropTypes.func,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
+}.isRequired;
 
 export default connect()(Login);
