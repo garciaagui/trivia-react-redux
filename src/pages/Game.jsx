@@ -12,6 +12,7 @@ class Game extends React.Component {
     styleButton: false,
     contador: 30,
     isDisabled: false,
+    nextBtn: false,
   };
 
   componentDidMount() {
@@ -80,13 +81,14 @@ class Game extends React.Component {
   handleAnswerClick = (answer) => {
     this.setState({ styleButton: true });
     const { correctAnswer } = this.state;
+    this.setState({ nextBtn: true });
     if (answer === correctAnswer) return this.handleCalculateAddScore(answer);
     return null;
   };
 
   render() {
     const { questions } = this.props;
-    const { answers, styleButton, contador, isDisabled } = this.state;
+    const { answers, styleButton, contador, isDisabled, nextBtn } = this.state;
     const RANDOM_NUMBER = 0.5;
     return (
       <section>
@@ -111,6 +113,7 @@ class Game extends React.Component {
               {answer}
             </button>
           ))}
+          {nextBtn && <button type="button" data-testid="btn-next">Next</button>}
         </div>
       </section>
     );
