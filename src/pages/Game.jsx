@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
+import { actionAddScore } from '../redux/actions';
 
 class Game extends React.Component {
   state = {
@@ -14,11 +15,11 @@ class Game extends React.Component {
   };
 
   componentDidMount() {
-    const { results } = this.props;
+    const { questions } = this.props;
     this.setState({
-      answers: [...results[0].incorrect_answers, results[0].correct_answer],
-      incorrectAnswers: results[0].incorrect_answers,
-      correctAnswer: results[0].correct_answer,
+      answers: [...questions[0].incorrect_answers, questions[0].correct_answer],
+      incorrectAnswers: questions[0].incorrect_answers,
+      correctAnswer: questions[0].correct_answer,
     });
     this.CountTimer();
   }
@@ -53,8 +54,38 @@ class Game extends React.Component {
     return `wrong-answer-${incorrectAnswers.indexOf(answer)}`;
   };
 
+  handleCalculateAddScore = (answer) => {
+    const { score, dispatch } = this.props;
+    const { contador } = this.state;
+    const SCORE_VALUE_DEFAULT = 10;
+    const SCORE_VALUE_HARD = 3;
+    const SCORE_VALUE_MEDIUM = 2;
+    const SCORE_VALUE_EASY = 1;
+
+    if (answer.difficulty === 'hard') {
+      return dispatch(
+        actionAddScore(score + (SCORE_VALUE_DEFAULT + (contador * SCORE_VALUE_HARD))),
+      );
+    }
+    if (answer.difficulty === 'medium') {
+      return dispatch(
+        actionAddScore(score + (SCORE_VALUE_DEFAULT + (contador * SCORE_VALUE_MEDIUM))),
+      );
+    }
+    return dispatch(
+      actionAddScore(score + (SCORE_VALUE_DEFAULT + (contador * SCORE_VALUE_EASY))),
+    );
+  };
+
+  handleAnswerClick = (answer) => {
+    this.setState({ styleButton: true });
+    const { correctAnswer } = this.state;
+    if (answer === correctAnswer) return this.handleCalculateAddScore(answer);
+    return null;
+  };
+
   render() {
-    const { results } = this.props;
+    const { questions } = this.props;
     const { answers, styleButton, contador, isDisabled } = this.state;
     const RANDOM_NUMBER = 0.5;
     return (
@@ -62,10 +93,10 @@ class Game extends React.Component {
         <Header />
         <h3>{contador}</h3>
         <h3 data-testid="question-category">
-          {results[0].category}
+          {questions[0].category}
         </h3>
         <h3 data-testid="question-text">
-          {results[0].question}
+          {questions[0].question}
         </h3>
         <div data-testid="answer-options">
           {answers.sort(() => Math.random() - RANDOM_NUMBER).map((answer) => (
@@ -75,7 +106,7 @@ class Game extends React.Component {
               disabled={ isDisabled }
               data-testid={ this.defineDataTestId(answer) }
               className={ styleButton ? this.defineClassStyle(answer) : '' }
-              onClick={ () => { this.setState({ styleButton: true }); } }
+              onClick={ () => { this.handleAnswerClick(answer); } }
             >
               {answer}
             </button>
@@ -87,12 +118,13 @@ class Game extends React.Component {
 }
 
 Game.propTypes = {
-  results: PropTypes.arrayOf(PropTypes.shape({
+  questions: PropTypes.arrayOf(PropTypes.shape({
   })),
 }.isRequired;
 
-const mapStateToProps = ({ reducerQuestions: { questions: { results } } }) => ({
-  results,
+const mapStateToProps = ({ reducerQuestions, player }) => ({
+  questions: reducerQuestions.questions.results,
+  score: player.score,
 });
 
 export default connect(mapStateToProps)(Game);

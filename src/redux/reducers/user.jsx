@@ -1,4 +1,4 @@
-import { NEW_USER } from '../actions';
+import { NEW_USER, ADD_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -14,6 +14,11 @@ function reducerUser(state = INITIAL_STATE, action) {
       ...state,
       name: action.payload.name,
       gravatarEmail: action.payload.email,
+    };
+  case ADD_SCORE:
+    return {
+      ...state,
+      score: action.payload,
     };
   default:
     return state;
