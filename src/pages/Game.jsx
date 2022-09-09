@@ -1,10 +1,66 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import Header from '../Components/Header';
 
-export default function Game() {
-  return (
-    <h3>
-      <Header />
-    </h3>
-  );
+class Game extends React.Component {
+  state = {
+    answers: [],
+    incorrectAnswers: [],
+    correctAnswer: '',
+  };
+
+  componentDidMount() {
+    const { results } = this.props;
+    this.setState({
+      answers: [...results[0].incorrect_answers, results[0].correct_answer],
+      incorrectAnswers: results[0].incorrect_answers,
+      correctAnswer: results[0].correct_answer,
+    });
+  }
+
+  definyDataTestId = (answer) => {
+    const { incorrectAnswers, correctAnswer } = this.state;
+    if (answer === correctAnswer) return 'correct-answer';
+    return `wrong-answer-${incorrectAnswers.indexOf(answer)}`;
+  };
+
+  render() {
+    const { results } = this.props;
+    const { answers } = this.state;
+    const RANDOM_NUMBER = 0.5;
+    return (
+      <section>
+        <Header />
+        <h3 data-testid="question-category">
+          {results[0].category}
+        </h3>
+        <h3 data-testid="question-text">
+          {results[0].question}
+        </h3>
+        <div data-testid="answer-options">
+          {answers.sort(() => Math.random() - RANDOM_NUMBER).map((answer) => (
+            <button
+              type="button"
+              key={ answer }
+              data-testid={ this.definyDataTestId(answer) }
+            >
+              { answer }
+            </button>
+          ))}
+        </div>
+      </section>
+    );
+  }
 }
+
+Game.propTypes = {
+  results: PropTypes.arrayOf(PropTypes.shape({
+  })),
+}.isRequired;
+
+const mapStateToProps = ({ reducerQuestions: { questions: { results } } }) => ({
+  results,
+});
+
+export default connect(mapStateToProps)(Game);
