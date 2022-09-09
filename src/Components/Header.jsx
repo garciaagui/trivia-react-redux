@@ -27,7 +27,7 @@ Header.propTypes = {
   score: PropTypes.number,
 }.isRequired;
 
-const mapStateToProps = ({ user: { gravatarEmail, name, score } }) => ({
+const mapStateToProps = ({ reducerUser: { gravatarEmail, name, score } }) => ({
   gravatarEmail,
   name,
   score,
