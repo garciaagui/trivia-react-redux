@@ -84,7 +84,7 @@ class Login extends React.Component {
           </label>
         </div>
         <div className="row justify-content-center align-items-center">
-          <di className="col-12 text-center mt-3">
+          <div className="col-12 text-center mt-3">
             <button
               type="button"
               onClick={ this.handlePlay }
@@ -106,7 +106,7 @@ class Login extends React.Component {
               <i className="fa-solid fa-gear me-2" />
               Settings
             </button>
-          </di>
+          </div>
         </div>
       </div>
     );
