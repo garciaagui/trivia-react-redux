@@ -7,12 +7,16 @@ import Settings from './pages/Settings';
 
 export default function App() {
   return (
-    <div className="App">
-      <Switch>
-        <Route exact path="/" component={ Login } />
-        <Route exact path="/game" component={ Game } />
-        <Route exact path="/settings" component={ Settings } />
-      </Switch>
-    </div>
+    <main>
+      <section className="container-fluid">
+        <div className="row justify-content-center align-items-center h100">
+          <Switch>
+            <Route exact path="/" component={ Login } />
+            <Route exact path="/game" component={ Game } />
+            <Route exact path="/settings" component={ Settings } />
+          </Switch>
+        </div>
+      </section>
+    </main>
   );
 }

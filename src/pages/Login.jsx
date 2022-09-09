@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTriviaToken, getTriviaQuestions } from '../services/fetchapi';
 import { newUser } from '../redux/actions';
+import logo from '../trivia.png';
 
 class Login extends React.Component {
   state = {
@@ -11,18 +12,14 @@ class Login extends React.Component {
     name: '',
   };
 
-  validateInputs = () => {
-    const { name, email } = this.state;
+  validateInputs = ({ name, email } = this.state) => {
     const isValidEmail = /\S+@\S+\.\S+/.test(email);
     const isValidLength = email.length > 0 && name.length > 0;
-    return isValidEmail && isValidLength;
+    return !(isValidEmail && isValidLength);
   };
 
   handleChange = ({ target: { name, value } }) => {
-    this.setState({
-      [name]: value,
-      isButtonPlayDisable: !this.validateInputs(),
-    });
+    this.setState({ [name]: value, isButtonPlayDisable: this.validateInputs() });
   };
 
   handlePlay = async () => {
@@ -43,46 +40,74 @@ class Login extends React.Component {
   render() {
     const { email, name, isButtonPlayDisable } = this.state;
     return (
-      <div>
-        <label htmlFor="input">
-          EMAIL
-          <input
-            type="email"
-            data-testid="input-gravatar-email"
-            placeholder="email"
-            name="email"
-            value={ email }
-            onChange={ this.handleChange }
-            required
-          />
-        </label>
-        <label htmlFor="name">
-          NOME
-          <input
-            type="text"
-            data-testid="input-player-name"
-            placeholder="nome"
-            name="name"
-            value={ name }
-            onChange={ this.handleChange }
-            required
-          />
-        </label>
-        <button
-          type="button"
-          data-testid="btn-play"
-          disabled={ isButtonPlayDisable }
-          onClick={ this.handlePlay }
-        >
-          Play
-        </button>
-        <button
-          type="button"
-          data-testid="btn-settings"
-          onClick={ this.handleSettings }
-        >
-          Settings
-        </button>
+      <div
+        className="col-10 col-md-6 col-lg-4 border rounded-3 p-4 shadow"
+        style={ { maxWidth: '400px', background: 'white' } }
+      >
+        <img
+          src={ logo }
+          className="img-fluid mx-auto d-block my-3"
+          style={ { maxHeight: '100px' } }
+          alt="logo"
+        />
+        <div className="row justify-content-center">
+          <label htmlFor="name" className="input-group flex-nowrap px-3 my-2">
+            <span className="input-group-text">
+              <i className="fa-solid fa-user text-primary" />
+            </span>
+            <input
+              type="text"
+              data-testid="input-player-name"
+              placeholder="nome"
+              name="name"
+              value={ name }
+              className="form-control"
+              onChange={ this.handleChange }
+              required
+            />
+          </label>
+          <label htmlFor="email" className="input-group flex-nowrap px-3 my-2">
+            <span className="input-group-text">
+              <i className="fa-solid fa-envelope text-primary" />
+            </span>
+            <input
+              type="email"
+              data-testid="input-gravatar-email"
+              placeholder="email"
+              name="email"
+              value={ email }
+              className="form-control"
+              onChange={ this.handleChange }
+              required
+            />
+
+          </label>
+        </div>
+        <div className="row justify-content-center align-items-center">
+          <di className="col-12 text-center mt-3">
+            <button
+              type="button"
+              onClick={ this.handlePlay }
+              data-testid="btn-play"
+              className="mx-2 btn btn-md btn-primary"
+              style={ { minWidth: '120px' } }
+              disabled={ isButtonPlayDisable }
+            >
+              <i className="fa-solid fa-play me-2" />
+              Play
+            </button>
+            <button
+              type="submit"
+              data-testid="btn-settings"
+              className="mx-2 btn btn-md btn-dark"
+              style={ { minWidth: '120px' } }
+              onClick={ this.handleSettings }
+            >
+              <i className="fa-solid fa-gear me-2" />
+              Settings
+            </button>
+          </di>
+        </div>
       </div>
     );
   }
