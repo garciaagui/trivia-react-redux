@@ -8,6 +8,9 @@ class Game extends React.Component {
     answers: [],
     incorrectAnswers: [],
     correctAnswer: '',
+    styleButton: false,
+    contador: 30,
+    isDisabled: false,
   };
 
   componentDidMount() {
@@ -17,9 +20,34 @@ class Game extends React.Component {
       incorrectAnswers: results[0].incorrect_answers,
       correctAnswer: results[0].correct_answer,
     });
+    this.CountTimer();
   }
 
-  definyDataTestId = (answer) => {
+  CountTimer = () => {
+    const oneSec = 1000;
+    const timer = setInterval(() => {
+      this.setState(
+        (prevState) => ({
+          contador: prevState.contador - 1,
+        }),
+        () => {
+          const { contador } = this.state;
+          if (contador === 0) {
+            clearInterval(timer);
+            this.setState({ isDisabled: true });
+          }
+        },
+      );
+    }, oneSec);
+  };
+
+  defineClassStyle = (answer) => {
+    const { correctAnswer } = this.state;
+    if (answer === correctAnswer) return 'correct-answer';
+    return 'wrong-answer';
+  };
+
+  defineDataTestId = (answer) => {
     const { incorrectAnswers, correctAnswer } = this.state;
     if (answer === correctAnswer) return 'correct-answer';
     return `wrong-answer-${incorrectAnswers.indexOf(answer)}`;
@@ -27,11 +55,12 @@ class Game extends React.Component {
 
   render() {
     const { results } = this.props;
-    const { answers } = this.state;
+    const { answers, styleButton, contador, isDisabled } = this.state;
     const RANDOM_NUMBER = 0.5;
     return (
       <section>
         <Header />
+        <h3>{contador}</h3>
         <h3 data-testid="question-category">
           {results[0].category}
         </h3>
@@ -43,9 +72,12 @@ class Game extends React.Component {
             <button
               type="button"
               key={ answer }
-              data-testid={ this.definyDataTestId(answer) }
+              disabled={ isDisabled }
+              data-testid={ this.defineDataTestId(answer) }
+              className={ styleButton ? this.defineClassStyle(answer) : '' }
+              onClick={ () => { this.setState({ styleButton: true }); } }
             >
-              { answer }
+              {answer}
             </button>
           ))}
         </div>
