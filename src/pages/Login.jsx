@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getTriviaToken, getTriviaQuestions } from '../services/fetchapi';
-import { newUser } from '../redux/actions';
+import { actionNewUser, actionQuestions } from '../redux/actions';
 import logo from '../trivia.png';
 
 class Login extends React.Component {
@@ -25,10 +25,11 @@ class Login extends React.Component {
   handlePlay = async () => {
     const token = await getTriviaToken();
     localStorage.setItem('token', (token));
-    const questions = getTriviaQuestions(token);
-    console.log(questions);
+    const questions = await getTriviaQuestions(token);
+    if (questions.response_code !== 0) return localStorage.removeItem('token');
     const { history, dispatch } = this.props;
-    dispatch(newUser(this.state));
+    dispatch(actionQuestions(questions));
+    dispatch(actionNewUser(this.state));
     history.push('/game');
   };
 
@@ -84,7 +85,7 @@ class Login extends React.Component {
           </label>
         </div>
         <div className="row justify-content-center align-items-center">
-          <di className="col-12 text-center mt-3">
+          <div className="col-12 text-center mt-3">
             <button
               type="button"
               onClick={ this.handlePlay }
@@ -106,7 +107,7 @@ class Login extends React.Component {
               <i className="fa-solid fa-gear me-2" />
               Settings
             </button>
-          </di>
+          </div>
         </div>
       </div>
     );
