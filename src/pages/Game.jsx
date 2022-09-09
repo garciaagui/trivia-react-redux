@@ -8,6 +8,7 @@ class Game extends React.Component {
     answers: [],
     incorrectAnswers: [],
     correctAnswer: '',
+    styleButton: false,
   };
 
   componentDidMount() {
@@ -19,7 +20,13 @@ class Game extends React.Component {
     });
   }
 
-  definyDataTestId = (answer) => {
+  defineClassStyle = (answer) => {
+    const { correctAnswer } = this.state;
+    if (answer === correctAnswer) return 'correct-answer';
+    return 'wrong-answer';
+  };
+
+  defineDataTestId = (answer) => {
     const { incorrectAnswers, correctAnswer } = this.state;
     if (answer === correctAnswer) return 'correct-answer';
     return `wrong-answer-${incorrectAnswers.indexOf(answer)}`;
@@ -27,7 +34,7 @@ class Game extends React.Component {
 
   render() {
     const { results } = this.props;
-    const { answers } = this.state;
+    const { answers, styleButton } = this.state;
     const RANDOM_NUMBER = 0.5;
     return (
       <section>
@@ -43,7 +50,9 @@ class Game extends React.Component {
             <button
               type="button"
               key={ answer }
-              data-testid={ this.definyDataTestId(answer) }
+              data-testid={ this.defineDataTestId(answer) }
+              className={ styleButton && this.defineClassStyle(answer) }
+              onClick={ () => { this.setState({ styleButton: true }); } }
             >
               { answer }
             </button>
