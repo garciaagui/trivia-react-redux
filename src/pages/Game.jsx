@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
-import { actionAddScore } from '../redux/actions';
+import { actionAddScore, actionCurrQuestion } from '../redux/actions';
 
 class Game extends React.Component {
   state = {
@@ -16,11 +16,12 @@ class Game extends React.Component {
   };
 
   componentDidMount() {
-    const { questions } = this.props;
+    const { questions, currQuestion } = this.props;
     this.setState({
-      answers: [...questions[0].incorrect_answers, questions[0].correct_answer],
-      incorrectAnswers: questions[0].incorrect_answers,
-      correctAnswer: questions[0].correct_answer,
+      answers: [...questions[currQuestion]
+        .incorrect_answers, questions[currQuestion].correct_answer],
+      incorrectAnswers: questions[currQuestion].incorrect_answers,
+      correctAnswer: questions[currQuestion].correct_answer,
     });
     this.CountTimer();
   }
@@ -86,8 +87,20 @@ class Game extends React.Component {
     return null;
   };
 
+  handleNextQuestion = () => {
+    const { dispatch, history } = this.props;
+    let { currQuestion } = this.props;
+    const maxCurr = 4;
+    if (currQuestion === maxCurr) history.push('/feedback');
+    dispatch(actionCurrQuestion(currQuestion += 1));
+    this.setState({
+      contador: 30,
+      styleButton: false,
+    });
+  };
+
   render() {
-    const { questions } = this.props;
+    const { questions, currQuestion } = this.props;
     const { answers, styleButton, contador, isDisabled, nextBtn } = this.state;
     const RANDOM_NUMBER = 0.5;
     return (
@@ -95,10 +108,10 @@ class Game extends React.Component {
         <Header />
         <h3>{contador}</h3>
         <h3 data-testid="question-category">
-          {questions[0].category}
+          {questions[currQuestion].category}
         </h3>
         <h3 data-testid="question-text">
-          {questions[0].question}
+          {questions[currQuestion].question}
         </h3>
         <div data-testid="answer-options">
           {answers.sort(() => Math.random() - RANDOM_NUMBER).map((answer) => (
@@ -113,7 +126,18 @@ class Game extends React.Component {
               {answer}
             </button>
           ))}
-          {nextBtn && <button type="button" data-testid="btn-next">Next</button>}
+          {
+            nextBtn
+              && (
+                <button
+                  type="button"
+                  data-testid="btn-next"
+                  onClick={ this.handleNextQuestion }
+                >
+                  Next
+                </button>
+              )
+          }
         </div>
       </section>
     );
@@ -127,6 +151,7 @@ Game.propTypes = {
 
 const mapStateToProps = ({ reducerQuestions, player }) => ({
   questions: reducerQuestions.questions.results,
+  currQuestion: reducerQuestions.currQuestion,
   score: player.score,
 });
 
