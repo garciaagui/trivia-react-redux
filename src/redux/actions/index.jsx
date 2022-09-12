@@ -1,6 +1,7 @@
 export const NEW_USER = 'NEW_USER';
 export const QUESTIONS = 'QUESTIONS';
 export const ADD_SCORE = 'ADD_SCORE';
+export const CURRENT_QUESTION = 'CURRENT_QUESTION';
 
 export const actionNewUser = (payload) => (
   {
@@ -19,6 +20,13 @@ export const actionAddScore = (payload) => (
 export const actionQuestions = (payload) => (
   {
     type: QUESTIONS,
+    payload,
+  }
+);
+
+export const actionCurrQuestion = (payload) => (
+  {
+    type: CURRENT_QUESTION,
     payload,
   }
 );

@@ -1,7 +1,8 @@
-import { QUESTIONS } from '../actions';
+import { CURRENT_QUESTION, QUESTIONS } from '../actions';
 
 const INITIAL_STATE = {
   questions: '',
+  currQuestion: 0,
 };
 
 function reducerQuestions(state = INITIAL_STATE, action) {
@@ -10,6 +11,11 @@ function reducerQuestions(state = INITIAL_STATE, action) {
     return {
       ...state,
       questions: action.payload,
+    };
+  case CURRENT_QUESTION:
+    return {
+      ...state,
+      currQuestion: action.payload,
     };
   default:
     return state;
