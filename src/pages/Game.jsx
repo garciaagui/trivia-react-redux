@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../Components/Header';
-import { actionAddScore, actionCurrQuestion } from '../redux/actions';
+import {
+  actionAddScore, actionCurrQuestion, actionAddAssertions } from '../redux/actions';
 
 class Game extends React.Component {
   state = {
@@ -79,11 +80,20 @@ class Game extends React.Component {
     );
   };
 
+  handleAddAssertions = () => {
+    const { dispatch } = this.props;
+    let { assertions } = this.props;
+    dispatch(actionAddAssertions(assertions += 1));
+  };
+
   handleAnswerClick = (answer) => {
     this.setState({ styleButton: true });
     const { correctAnswer } = this.state;
     this.setState({ nextBtn: true });
-    if (answer === correctAnswer) return this.handleCalculateAddScore(answer);
+    if (answer === correctAnswer) {
+      this.handleAddAssertions();
+      return this.handleCalculateAddScore(answer);
+    }
     return null;
   };
 
@@ -153,6 +163,7 @@ const mapStateToProps = ({ reducerQuestions, player }) => ({
   questions: reducerQuestions.questions.results,
   currQuestion: reducerQuestions.currQuestion,
   score: player.score,
+  assertions: player.assertions,
 });
 
 export default connect(mapStateToProps)(Game);
