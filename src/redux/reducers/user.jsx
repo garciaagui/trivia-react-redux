@@ -1,8 +1,8 @@
-import { NEW_USER, ADD_SCORE } from '../actions';
+import { NEW_USER, ADD_SCORE, ADD_ASSERTIONS } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
-  assertions: '',
+  assertions: 0,
   score: 0,
   gravatarEmail: '',
 };
@@ -19,6 +19,11 @@ function reducerUser(state = INITIAL_STATE, action) {
     return {
       ...state,
       score: action.payload,
+    };
+  case ADD_ASSERTIONS:
+    return {
+      ...state,
+      assertions: action.payload,
     };
   default:
     return state;
