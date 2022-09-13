@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getTriviaToken, getTriviaQuestions } from '../services/fetchapi';
 import { actionNewUser, actionQuestions } from '../redux/actions';
 import logo from '../trivia.png';
+import InputIcon from '../Components/InputIcon';
 
 class Login extends React.Component {
   state = {
@@ -41,57 +42,51 @@ class Login extends React.Component {
   render() {
     const { email, name, isButtonPlayDisable } = this.state;
     return (
-      <div
-        className="col-10 col-md-6 col-lg-4 border rounded-3 p-4 shadow"
-        style={ { maxWidth: '400px', background: 'white' } }
-      >
-        <img
-          src={ logo }
-          className="img-fluid mx-auto d-block my-3"
-          style={ { maxHeight: '100px' } }
-          alt="logo"
-        />
-        <div className="row justify-content-center">
-          <label htmlFor="name" className="input-group flex-nowrap px-3 my-2">
-            <span className="input-group-text">
-              <i className="fa-solid fa-user text-primary" />
-            </span>
-            <input
-              type="text"
-              data-testid="input-player-name"
-              placeholder="nome"
-              name="name"
-              value={ name }
-              className="form-control"
-              onChange={ this.handleChange }
-              required
-            />
-          </label>
-          <label htmlFor="email" className="input-group flex-nowrap px-3 my-2">
-            <span className="input-group-text">
-              <i className="fa-solid fa-envelope text-primary" />
-            </span>
-            <input
-              type="email"
-              data-testid="input-gravatar-email"
-              placeholder="email"
-              name="email"
-              value={ email }
-              className="form-control"
-              onChange={ this.handleChange }
-              required
-            />
-
-          </label>
-        </div>
-        <div className="row justify-content-center align-items-center">
-          <div className="col-12 text-center mt-3">
+      <div className="row justify-content-center align-items-center h100">
+        <div
+          className="col-10 col-md-6 col-lg-4 rounded-3 p-4 shadow"
+          style={ { maxWidth: '400px', background: '#272c33' } }
+        >
+          <img
+            src={ logo }
+            className="img-fluid mx-auto d-block my-3"
+            style={ { maxHeight: '100px' } }
+            alt="logo"
+          />
+          <div className="row justify-content-center">
+            <label htmlFor="name" className="input-group flex-nowrap px-3 my-2">
+              <InputIcon icon="user" />
+              <input
+                type="text"
+                data-testid="input-player-name"
+                placeholder="nome"
+                name="name"
+                value={ name }
+                className="form-control"
+                onChange={ this.handleChange }
+                required
+              />
+            </label>
+            <label htmlFor="email" className="input-group flex-nowrap px-3 my-2">
+              <InputIcon icon="envelope" />
+              <input
+                type="email"
+                data-testid="input-gravatar-email"
+                placeholder="email"
+                name="email"
+                value={ email }
+                className="form-control"
+                onChange={ this.handleChange }
+                required
+              />
+            </label>
+          </div>
+          <div className="row justify-content-center align-items-center">
             <button
               type="button"
               onClick={ this.handlePlay }
               data-testid="btn-play"
-              className="mx-2 btn btn-md btn-primary"
-              style={ { minWidth: '120px' } }
+              className="col-5 mt-3 mx-2 btn btn-md btn-info text-white"
               disabled={ isButtonPlayDisable }
             >
               <i className="fa-solid fa-play me-2" />
@@ -100,8 +95,7 @@ class Login extends React.Component {
             <button
               type="submit"
               data-testid="btn-settings"
-              className="mx-2 btn btn-md btn-dark"
-              style={ { minWidth: '120px' } }
+              className="col-5 mt-3 mx-2 btn btn-md btn-secondary"
               onClick={ this.handleSettings }
             >
               <i className="fa-solid fa-gear me-2" />

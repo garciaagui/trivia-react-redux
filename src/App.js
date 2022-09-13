@@ -9,18 +9,14 @@ import Ranking from './pages/Ranking';
 
 export default function App() {
   return (
-    <main>
-      <section className="container-fluid">
-        <div className="row justify-content-center align-items-center h100">
-          <Switch>
-            <Route exact path="/" component={ Login } />
-            <Route exact path="/game" component={ Game } />
-            <Route exact path="/settings" component={ Settings } />
-            <Route exact path="/feedback" component={ Feedback } />
-            <Route exact path="/ranking" component={ Ranking } />
-          </Switch>
-        </div>
-      </section>
+    <main className="container">
+      <Switch>
+        <Route exact path="/" component={ Login } />
+        <Route exact path="/game" component={ Game } />
+        <Route exact path="/settings" component={ Settings } />
+        <Route exact path="/feedback" component={ Feedback } />
+        <Route exact path="/ranking" component={ Ranking } />
+      </Switch>
     </main>
   );
 }

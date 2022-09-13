@@ -1,7 +1,8 @@
 body {
-  background: #272c33;
+  background: url('../public/question-background.png');
+  background-size: cover;
   box-sizing: border-box;
-  color: white;
+  color: #272c33;
   margin: 0;
   min-height: 100vh;
   padding: 0;
@@ -15,6 +16,11 @@ main {
 .h100 {
   height: 100vh;
 }
+
+.unselect-answer {
+  border: 3px solid white;
+}
+
 
 .correct-answer {
   border: 3px solid rgb(6, 240, 15);

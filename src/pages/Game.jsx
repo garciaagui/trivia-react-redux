@@ -109,47 +109,83 @@ class Game extends React.Component {
     });
   };
 
+  decodeEntity = (inputStr) => {
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = inputStr;
+    return textarea.value;
+  };
+
   render() {
     const { questions, currQuestion } = this.props;
     const { answers, styleButton, contador, isDisabled, nextBtn } = this.state;
     const RANDOM_NUMBER = 0.5;
+    const warningTime = 25;
+    const dangerTime = 15;
     return (
-      <section>
+      <>
         <Header />
-        <h3>{contador}</h3>
-        <h3 data-testid="question-category">
-          {questions[currQuestion].category}
-        </h3>
-        <h3 data-testid="question-text">
-          {questions[currQuestion].question}
-        </h3>
-        <div data-testid="answer-options">
-          {answers.sort(() => Math.random() - RANDOM_NUMBER).map((answer) => (
-            <button
-              type="button"
-              key={ answer }
-              disabled={ isDisabled }
-              data-testid={ this.defineDataTestId(answer) }
-              className={ styleButton ? this.defineClassStyle(answer) : '' }
-              onClick={ () => { this.handleAnswerClick(answer); } }
+        <div className="row justify-content-center align-items-center mt-3">
+          <div
+            className="col-11 col-md-6 col-lg-5 border rounded-3 p-4 px-lg-5 shadow"
+            style={ { background: 'white' } }
+          >
+            <h3
+              className={ `fs-1 text-center 
+              text-success 
+              bg-light
+              p-2
+              shadow-sm
+              rounded-3
+              ${contador <= warningTime && 'text-warning'} 
+              ${contador <= dangerTime && 'text-danger'}` }
             >
-              {answer}
-            </button>
-          ))}
-          {
-            nextBtn
+              <i className="fa-solid fa-clock me-2" />
+              {contador}
+            </h3>
+            <h2
+              className="text-start my-3 text-primary"
+              data-testid="question-category"
+            >
+              {this.decodeEntity(questions[currQuestion].category)}
+            </h2>
+            <h4 data-testid="question-text">
+              {this.decodeEntity(questions[currQuestion].question)}
+            </h4>
+            <div data-testid="answer-options" className="row mt-3">
+              {answers.sort(() => Math.random() - RANDOM_NUMBER).map((answer) => (
+                <button
+                  type="button"
+                  key={ answer }
+                  disabled={ isDisabled }
+                  data-testid={ this.defineDataTestId(answer) }
+                  className={
+                    `btn btn-lg btn-light d-block my-2 text-start unselect-answer
+                    ${styleButton ? this.defineClassStyle(answer) : ''} `
+                  }
+                  onClick={ () => { this.handleAnswerClick(answer); } }
+                >
+                  {this.decodeEntity(answer)}
+                </button>
+              ))}
+              {
+                nextBtn
               && (
                 <button
                   type="button"
                   data-testid="btn-next"
+                  className="btn btn-lg btn-primary mt-3"
                   onClick={ this.handleNextQuestion }
+                  style={ { fontWeight: '900' } }
                 >
                   Next
+                  <i className="fa-solid fa-arrow-right fa-lg ms-2" />
                 </button>
               )
-          }
+              }
+            </div>
+          </div>
         </div>
-      </section>
+      </>
     );
   }
 }
