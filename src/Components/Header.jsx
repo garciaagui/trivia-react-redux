@@ -8,14 +8,27 @@ class Header extends React.Component {
     const { gravatarEmail, name, score } = this.props;
     const MD5 = md5(gravatarEmail).toString();
     return (
-      <header>
-        <img
-          data-testid="header-profile-picture"
-          src={ `https://www.gravatar.com/avatar/${MD5}` }
-          alt={ name }
-        />
-        <h3 data-testid="header-player-name">{ name }</h3>
-        <h3 data-testid="header-score">{ score }</h3>
+      <header className="row align-items-center">
+        <div className="col-2 col-lg-1 my-3">
+          <img
+            data-testid="header-profile-picture"
+            src={ `https://www.gravatar.com/avatar/${MD5}` }
+            alt={ name }
+            className="img-fluid img-thumbnail"
+            style={ { borderRadius: '50%', maxHeight: '80px' } }
+          />
+        </div>
+        <div className="col-10 col-lg-4 my-2" style={ { color: '#ffffff' } }>
+          <h5>
+            <i className="fa-solid fa-user ms-1 me-2" style={ { color: '#f9ba18' } } />
+            <span data-testid="header-player-name">{ name }</span>
+          </h5>
+          <h5>
+            <i className="fa-solid fa-star me-2" style={ { color: '#f9ba18' } } />
+            <span data-testid="header-score">{ score }</span>
+          </h5>
+        </div>
+        <hr style={ { border: '1px solid #fff' } } />
       </header>
     );
   }
