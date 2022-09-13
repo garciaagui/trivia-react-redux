@@ -57,7 +57,7 @@ class Game extends React.Component {
     return `wrong-answer-${incorrectAnswers.indexOf(answer)}`;
   };
 
-  handleCalculateAddScore = (answer) => {
+  handleCalculateAddScore = (difficulty) => {
     const { score, dispatch } = this.props;
     const { contador } = this.state;
     const SCORE_VALUE_DEFAULT = 10;
@@ -65,12 +65,12 @@ class Game extends React.Component {
     const SCORE_VALUE_MEDIUM = 2;
     const SCORE_VALUE_EASY = 1;
 
-    if (answer.difficulty === 'hard') {
+    if (difficulty === 'hard') {
       return dispatch(
         actionAddScore(score + (SCORE_VALUE_DEFAULT + (contador * SCORE_VALUE_HARD))),
       );
     }
-    if (answer.difficulty === 'medium') {
+    if (difficulty === 'medium') {
       return dispatch(
         actionAddScore(score + (SCORE_VALUE_DEFAULT + (contador * SCORE_VALUE_MEDIUM))),
       );
@@ -86,26 +86,30 @@ class Game extends React.Component {
     dispatch(actionAddAssertions(assertions += 1));
   };
 
-  handleAnswerClick = (answer) => {
+  handleAnswerClick = (answer, difficulty) => {
     this.setState({ styleButton: true });
     const { correctAnswer } = this.state;
     this.setState({ nextBtn: true });
     if (answer === correctAnswer) {
       this.handleAddAssertions();
-      return this.handleCalculateAddScore(answer);
+      return this.handleCalculateAddScore(difficulty);
     }
     return null;
   };
 
   handleNextQuestion = () => {
-    const { dispatch, history } = this.props;
+    const { dispatch, history, questions } = this.props;
     let { currQuestion } = this.props;
     const maxCurr = 4;
-    if (currQuestion === maxCurr) history.push('/feedback');
+    if (currQuestion === maxCurr) return history.push('/feedback');
     dispatch(actionCurrQuestion(currQuestion += 1));
     this.setState({
       contador: 30,
       styleButton: false,
+      answers: [...questions[currQuestion]
+        .incorrect_answers, questions[currQuestion].correct_answer],
+      incorrectAnswers: questions[currQuestion].incorrect_answers,
+      correctAnswer: questions[currQuestion].correct_answer,
     });
   };
 
@@ -162,7 +166,9 @@ class Game extends React.Component {
                     `btn btn-lg btn-light d-block my-2 text-start unselect-answer
                     ${styleButton ? this.defineClassStyle(answer) : ''} `
                   }
-                  onClick={ () => { this.handleAnswerClick(answer); } }
+                  onClick={ () => {
+                    this.handleAnswerClick(answer, questions[currQuestion].difficulty);
+                  } }
                 >
                   {this.decodeEntity(answer)}
                 </button>
