@@ -18,13 +18,31 @@ class Game extends React.Component {
 
   componentDidMount() {
     const { questions, currQuestion } = this.props;
+    const allAnswers = [...questions[currQuestion].incorrect_answers,
+      questions[currQuestion].correct_answer];
+    const RANDOM_NUMBER = 0.5;
+    const sortAnswers = allAnswers.sort(() => Math.random() - RANDOM_NUMBER);
     this.setState({
-      answers: [...questions[currQuestion]
-        .incorrect_answers, questions[currQuestion].correct_answer],
+      answers: sortAnswers,
       incorrectAnswers: questions[currQuestion].incorrect_answers,
       correctAnswer: questions[currQuestion].correct_answer,
     });
     this.CountTimer();
+  }
+
+  componentDidUpdate(prevValue) {
+    const { questions, currQuestion } = this.props;
+    if (currQuestion !== prevValue.currQuestion) {
+      const allAnswers = [...questions[currQuestion].incorrect_answers,
+        questions[currQuestion].correct_answer];
+      const RANDOM_NUMBER = 0.5;
+      const sortAnswers = allAnswers.sort(() => Math.random() - RANDOM_NUMBER);
+      this.setState({
+        answers: sortAnswers,
+        incorrectAnswers: questions[currQuestion].incorrect_answers,
+        correctAnswer: questions[currQuestion].correct_answer,
+      });
+    }
   }
 
   CountTimer = () => {
@@ -47,8 +65,20 @@ class Game extends React.Component {
 
   defineClassStyle = (answer) => {
     const { correctAnswer } = this.state;
-    if (answer === correctAnswer) return 'correct-answer';
-    return 'wrong-answer';
+    if (answer === correctAnswer) {
+      return ['correct-answer',
+        <i
+          key="correct"
+          className="fa-regular fa-circle-check me-3"
+          style={ { color: 'rgb(6, 240, 15)' } }
+        />];
+    }
+    return ['wrong-answer',
+      <i
+        key="wrong"
+        className="fa-regular fa-circle-xmark me-3"
+        style={ { color: 'red' } }
+      />];
   };
 
   defineDataTestId = (answer) => {
@@ -98,7 +128,7 @@ class Game extends React.Component {
   };
 
   handleNextQuestion = () => {
-    const { dispatch, history, questions } = this.props;
+    const { dispatch, history } = this.props;
     let { currQuestion } = this.props;
     const maxCurr = 4;
     if (currQuestion === maxCurr) return history.push('/feedback');
@@ -106,10 +136,6 @@ class Game extends React.Component {
     this.setState({
       contador: 30,
       styleButton: false,
-      answers: [...questions[currQuestion]
-        .incorrect_answers, questions[currQuestion].correct_answer],
-      incorrectAnswers: questions[currQuestion].incorrect_answers,
-      correctAnswer: questions[currQuestion].correct_answer,
     });
   };
 
@@ -122,7 +148,6 @@ class Game extends React.Component {
   render() {
     const { questions, currQuestion } = this.props;
     const { answers, styleButton, contador, isDisabled, nextBtn } = this.state;
-    const RANDOM_NUMBER = 0.5;
     const warningTime = 25;
     const dangerTime = 15;
     return (
@@ -130,7 +155,7 @@ class Game extends React.Component {
         <Header />
         <div className="row justify-content-center align-items-center mt-3">
           <div
-            className="col-11 col-md-6 col-lg-5 border rounded-3 p-4 px-lg-5 shadow"
+            className="col-11 col-md-6 col-lg-5 rounded-3 p-4 px-lg-5 shadow"
             style={ { background: 'white' } }
           >
             <h3
@@ -156,20 +181,21 @@ class Game extends React.Component {
               {this.decodeEntity(questions[currQuestion].question)}
             </h4>
             <div data-testid="answer-options" className="row mt-3">
-              {answers.sort(() => Math.random() - RANDOM_NUMBER).map((answer) => (
+              {answers.map((answer) => (
                 <button
                   type="button"
                   key={ answer }
                   disabled={ isDisabled }
                   data-testid={ this.defineDataTestId(answer) }
                   className={
-                    `btn btn-lg btn-light d-block my-2 text-start unselect-answer
-                    ${styleButton ? this.defineClassStyle(answer) : ''} `
+                    `unselect-answer d-block my-2 text-start rounded-3 p-2
+                    ${styleButton && this.defineClassStyle(answer)[0]}`
                   }
                   onClick={ () => {
                     this.handleAnswerClick(answer, questions[currQuestion].difficulty);
                   } }
                 >
+                  {styleButton && this.defineClassStyle(answer)[1]}
                   {this.decodeEntity(answer)}
                 </button>
               ))}
