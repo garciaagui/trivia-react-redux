@@ -19,13 +19,13 @@
 
 Projeto **14** do curso de Desenvolvimento Web da [Trybe][trybe-site-url].
 
-O Trivia é um jogo de perguntas e respostas, no qual a pessoa jogadora deverá responder uma sequência de 5 perguntas. Ao término da partida, ela terá acesso ao seu _score_ e também poderá conferir um ranking das melhores pontuações.
+A aplicação apresenta um formato semelhante a um jogo de trivia, com perguntas e respostas interativas, no qual a pessoa jogadora deverá responder uma sequência de 5 perguntas. Ao término da partida, ela terá acesso ao seu _score_ e também poderá conferir um ranking das melhores pontuações.
 
 A base de dados utilizada provêm de duas APIs distintas: [Trivia API](https://opentdb.com/api_config.php) para as questões e [Gravatar](https://br.gravatar.com/site/implement/images/) para as imagens das pessoas jogadoras.
 
 O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metodologia ágil e dos frameworks Scrum e Kanban. O Scrum foi utilizado para gerenciar o projeto, enquanto o Kanban acompanhava as tarefas e permitia uma visualização das atividades.
 
-<!-- [![Projeto Trivia][project-demo]][project-url] -->
+[![Projeto Trivia][project-demo]][project-url]
 
 <br/>
 
@@ -82,7 +82,7 @@ O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metod
 
 ## Como Executar o Projeto
 
-<!-- > ℹ️ Caso deseje somente testar a aplicação, [clique aqui][project-url]. -->
+> ℹ️ Caso deseje somente testar a aplicação, [clique aqui][project-url].
 
 Para rodar o projeto localmente, siga os passos abaixo.
 
@@ -166,7 +166,7 @@ _"O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda
 
 [trybe-site-url]: https://www.betrybe.com/
 [project-demo]: ./project-demo.gif
-[project-url]: https://recipes-perfecto-app.vercel.app
+[project-url]: https://trivia-g5.vercel.app
 
 <!-- Stacks URLs -->
 
