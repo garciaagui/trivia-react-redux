@@ -130,15 +130,15 @@ _"The program features over 1,500 hours of online classes covering introduction 
 
 Check out the social networks and means of contact of the team members responsible for the development of this project 👇
 
-- Eric da Silva Contimos | [Email](email-eric) - [LinkedIn](linkedin-eric) - [GitHub](github-eric)
+- Eric da Silva Contimos | [Email][email-eric] - [LinkedIn][linkedin-eric] - [GitHub][github-eric]
 
-- Gabriel Voltani Vatanabe | [LinkedIn](linkedin-gabriel) - [GitHub](github-gabriel)
+- Gabriel Voltani Vatanabe | [LinkedIn][linkedin-gabriel] - [GitHub][github-gabriel]
 
-- Guilherme Garcia | [Email](email-guilherme) - [LinkedIn](linkedin-guilherme) - [GitHub](github-guilherme)
+- Guilherme Garcia | [Email][email-guilherme] - [LinkedIn][linkedin-guilherme] - [GitHub][github-guilherme]
 
-- Guyddo Gonçalves Lima | [Email](email-guyddo) - [LinkedIn](linkedin-guyddo) - [GitHub](github-guyddo)
+- Guyddo Gonçalves Lima | [Email][email-guyddo] - [LinkedIn][linkedin-guyddo] - [GitHub][github-guyddo]
 
-- Miguel Vieira | [LinkedIn](linkedin-miguel) - [GitHub](github-miguel)
+- Miguel Vieira | [LinkedIn][linkedin-miguel] - [GitHub][github-miguel]
 
 <p align="right"><a href="#readme-top">Voltar ao topo</a></p>
 
@@ -171,7 +171,7 @@ Check out the social networks and means of contact of the team members responsib
 
 <!-- Contact URLs -->
 
-[email-eric]: ericdasilva0@gmail.com
+[email-eric]: mailto:ericdasilva0@gmail.com
 [linkedin-eric]: https://www.linkedin.com/in/eric-contimos/
 [github-eric]: https://github.com/Eric-html
 [linkedin-gabriel]: https://www.linkedin.com/in/gabrielvoltani/
@@ -181,6 +181,6 @@ Check out the social networks and means of contact of the team members responsib
 [github-guilherme]: https://github.com/garciaagui
 [linkedin-miguel]: https://www.linkedin.com/in/miguel-vieira015/
 [github-miguel]: https://github.com/mjggel
-[email-guyddo]: guyddogl@gmail.com
+[email-guyddo]: mailto:guyddogl@gmail.com
 [linkedin-guyddo]: https://www.linkedin.com/in/guyddogl/
 [github-guyddo]: https://github.com/guyddogl
