@@ -23,7 +23,7 @@ A aplicação apresenta um formato semelhante a um jogo de trivia, com perguntas
 
 A base de dados utilizada provêm de duas APIs distintas: [Trivia API](https://opentdb.com/api_config.php) para as questões e [Gravatar](https://br.gravatar.com/site/implement/images/) para as imagens das pessoas jogadoras.
 
-O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metodologia ágil e dos frameworks Scrum e Kanban. O Scrum foi utilizado para gerenciar o projeto, enquanto o Kanban acompanhava as tarefas e permitia uma visualização das atividades.
+O projeto foi realizado em <a href="#equipe-de-desenvolvimento">equipe</a>, com a adoção da metodologia ágil e dos frameworks Scrum e Kanban. O Scrum foi utilizado para gerenciar o projeto, enquanto o Kanban acompanhava as tarefas e permitia uma visualização das atividades.
 
 [![Projeto Trivia][project-demo]][project-url]
 
