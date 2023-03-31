@@ -1,38 +1,38 @@
 <a name="readme-top"></a>
 
-<h1 align="center">Projeto Trivia 💡❓</h1>
+<h1 align="center">Project Trivia 💡❓</h1>
 
-<details>
-  <summary>Sumário</summary>
-  <ol>
-    <li><a href="#sobre-o-projeto">Sobre o Projeto</a></li>
-    <li><a href="#tecnologias">Tecnologias</a></li>
-    <li><a href="#funcionalidades">Funcionalidades</a></li>
-    <li><a href="#como-executar-o-projeto">Como Executar o Projeto</a></li>
-    <li><a href="#habilidades">Habilidades</a></li>
-    <li><a href="#sobre-a-trybe">Sobre a Trybe</a></li>
-    <li><a href="#equipe">Equipe</a></li>
-  </ol>
-</details>
+> [🇧🇷 Clique aqui para acessar a versão em português.](README_pt-br.md)
 
-## Sobre o Projeto
+## Summary
 
-Projeto **14** do curso de Desenvolvimento Web da [Trybe][trybe-site-url].
+<ol>
+  <li><a href="#description">Description</a></li>
+  <li><a href="#technologies">Technologies</a></li>
+  <li><a href="#features">Features</a></li>
+  <li><a href="#how-to-run">How to Run</a></li>
+  <li><a href="#about-trybe">About Trybe</a></li>
+  <li><a href="#development-team">Development Team</a></li>
+</ol>
 
-A aplicação apresenta um formato semelhante a um jogo de trivia, com perguntas e respostas interativas, no qual a pessoa jogadora deverá responder uma sequência de 5 perguntas. Ao término da partida, ela terá acesso ao seu _score_ e também poderá conferir um ranking das melhores pontuações.
+## Description
 
-A base de dados utilizada provêm de duas APIs distintas: [Trivia API](https://opentdb.com/api_config.php) para as questões e [Gravatar](https://br.gravatar.com/site/implement/images/) para as imagens das pessoas jogadoras.
+**14th project** of the [Trybe][trybe-site-url] Web Development course.
 
-O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metodologia ágil e dos frameworks Scrum e Kanban. O Scrum foi utilizado para gerenciar o projeto, enquanto o Kanban acompanhava as tarefas e permitia uma visualização das atividades.
+The application presents a format similar to a trivia game, with interactive questions and answers, in which the player must answer a sequence of 5 questions. At the end of the game, the player will have access to their score and can also check a ranking of the best scores.
+
+The database used comes from two distinct APIs: [Trivia API](https://opentdb.com/api_config.php) for questions and [Gravatar](https://br.gravatar.com/site/implement/images/) for player images.
+
+The project was developed in a <a href="#development-team">team</a>, with the adoption of the agile methodology and Scrum and Kanban frameworks. Scrum was used to manage the project, while Kanban tracked tasks and provided a visualization of activities.
 
 [![Projeto Trivia][project-demo]][project-url]
 
 <br/>
 
-## Tecnologias
+## Technologies
 
 <details>
-  <summary><strong>💻 Desenvolvimento </strong></summary><br />
+  <summary><strong>💻 Development </strong></summary><br />
 
 - [HTML5][html5-url]
 - [CSS3][css3-url]
@@ -47,7 +47,7 @@ O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metod
 </details>
 
 <details>
-  <summary><strong>🧪 Testes </strong></summary><br />
+  <summary><strong>🧪 Testing </strong></summary><br />
 
 - [Jest][jest-url]
 - [React Testing Library][rtl-url]
@@ -57,7 +57,7 @@ O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metod
 </details>
 
 <details>
-  <summary><strong>✨ Alinhamento e qualidade de código </strong></summary><br />
+  <summary><strong>✨ Code alignment and quality </strong></summary><br />
 
 - [ESLint][eslint-url]
 - [StyleLint][stylelint-url]
@@ -68,49 +68,49 @@ O projeto foi realizado em <a href="#equipe">equipe</a>, com a adoção da metod
 
 <br/>
 
-## Funcionalidades
+## Features
 
 <ul>
-  <li>Logar no jogo e, se o email tiver cadastro no site <a href="https://pt.gravatar.com/">Gravatar</a>, ter sua foto associada ao perfil da pessoa usuária.</li>
-  <li>Acessar a página referente ao jogo, onde a pessoa jogadora deve escolher uma das respostas disponíveis para cada uma das perguntas apresentadas. A resposta deve ser marcada antes do contador de tempo chegar a zero, caso contrário a resposta será considerada errada.</li>
-  <li>Após 5 perguntas respondidas, a pessoa jogadora será redirecionada para a tela de score, onde o texto mostrado depende do número de acertos.</li>
-  <li>Visualizar a página de ranking, se quiser, ao final de cada jogo.</li>
-  <li>Configurar algumas opções para o jogo em uma tela de configuração acessível a partir do cabeçalho do app.</li>
+  <li>Log in to the game and, if the email is registered on the <a href="https://en.gravatar.com/">Gravatar</a> website, have the user's profile picture associated with their account.</li>
+  <li>Access the game page, where the player must choose one of the available answers for each of the questions presented. The answer must be marked before the countdown timer reaches zero, otherwise the answer will be considered incorrect.</li>
+  <li>After 5 questions answered, the player will be redirected to the score screen, where the text shown depends on the number of correct answers.</li>
+  <li>View the ranking page, if desired, at the end of each game.</li>
+  <li>Configure some options for the game on a settings screen accessible from the app header.</li>
 </ul>
 
 <br/>
 
-## Como Executar o Projeto
+## How to Run
 
-> ℹ️ Caso deseje somente testar a aplicação, [clique aqui][project-url].
+> ℹ️ If you only want to test the application, [click here][project-url].
 
-Para rodar o projeto localmente, siga os passos abaixo.
+To run the project locally, follow the steps below.
 
-1. Clone o repositório;
-
-```
-git clone git@github.com:garciaagui/trybe-project-14_trivia-react-redux.git
-```
-
-2. Navegue até a raiz do projeto;
+1. Clone the repository;
 
 ```
-cd trybe-project-14_trivia-react-redux
+git clone git@github.com:garciaagui/trivia-react-redux.git
 ```
 
-3. Instale as dependências;
+2. Navigate to the project root directory;
+
+```
+cd trivia-react-redux/
+```
+
+3. Install the dependencies;
 
 ```
 npm install
 ```
 
-4. Inicialize o projeto;
+4. Start the project;
 
 ```
 npm run start
 ```
 
-5. Caso deseje, utilize o comando abaixo para executar os testes.
+5. If desired, use the command below to run the tests.
 
 ```
 npm run test:coverage
@@ -118,47 +118,27 @@ npm run test:coverage
 
 <br/>
 
-## Habilidades
+## About Trybe
 
-<ul>
-  <li>Utilização de componentes funcionais React.</li>
-  <li>Utilização do Redux para gerencimento de estado.</li>
-  <li>Criação de rotas utilizando React Router.</li>
-  <li>Criação de testes automatizados com RTL, de modo a garantir que a aplicação possua uma boa cobertura de testes.</li>
-  <li>Aplicação dos frameworks de metodologia ágil Scrum e Kanban para gerenciamento do projeto.</li>
-</ul>
+_"[Trybe][trybe-site-url] is a future school for anyone who wants to improve their lives and build a successful career in technology, where the person only pays when they get a good job."_
+
+_"The program features over 1,500 hours of online classes covering introduction to software development, front-end, back-end, computer science, software engineering, agile methodologies, and behavioral skills."_
 
 <br/>
 
-## Sobre a Trybe
+## Development Team
 
-_"A [Trybe][trybe-site-url] é uma escola do futuro para qualquer pessoa que queira melhorar de vida e construir uma carreira de sucesso em tecnologia, onde a pessoa só paga quando conseguir um bom trabalho."_
+Check out the social networks and means of contact of the team members responsible for the development of this project 👇
 
-_"O programa conta com mais de 1.500 horas de aulas presenciais e online, aborda introdução ao desenvolvimento de software, front-end, back-end, ciência da computação, engenharia de software, metodologias ágeis e habilidades comportamentais._"
+- Eric da Silva Contimos | [Email](email-eric) - [LinkedIn](linkedin-eric) - [GitHub](github-eric)
 
-<br/>
+- Gabriel Voltani Vatanabe | [LinkedIn](linkedin-gabriel) - [GitHub](github-gabriel)
 
-## Equipe
+- Guilherme Garcia | [Email](email-guilherme) - [LinkedIn](linkedin-guilherme) - [GitHub](github-guilherme)
 
-### Eric da Silva Contimos
+- Guyddo Gonçalves Lima | [Email](email-guyddo) - [LinkedIn](linkedin-guyddo) - [GitHub](github-guyddo)
 
-[![Gmail][gmail-badge]][email-eric] [![Linkedin][linkedin-badge]][linkedin-eric] [![GitHub][github-badge]][github-eric]
-
-### Gabriel Voltani Vatanabe
-
-[![Linkedin][linkedin-badge]][linkedin-gabriel] [![GitHub][github-badge]][github-gabriel]
-
-### Guilherme Garcia
-
-[![Gmail][gmail-badge]][email-guilherme] [![Linkedin][linkedin-badge]][linkedin-guilherme] [![GitHub][github-badge]][github-guilherme]
-
-### Guyddo Gonçalves Lima
-
-[![Gmail][gmail-badge]][email-guyddo] [![Linkedin][linkedin-badge]][linkedin-guyddo] [![GitHub][github-badge]][github-guyddo]
-
-### Miguel Vieira
-
-[![Linkedin][linkedin-badge]][linkedin-miguel] [![GitHub][github-badge]][github-miguel]
+- Miguel Vieira | [LinkedIn](linkedin-miguel) - [GitHub](github-miguel)
 
 <p align="right"><a href="#readme-top">Voltar ao topo</a></p>
 
