@@ -140,7 +140,7 @@ Check out the social networks and means of contact of the team members responsib
 
 - Miguel Vieira | [LinkedIn][linkedin-miguel] - [GitHub][github-miguel]
 
-<p align="right"><a href="#readme-top">Voltar ao topo</a></p>
+<p align="right"><a href="#readme-top">Back to top</a></p>
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
